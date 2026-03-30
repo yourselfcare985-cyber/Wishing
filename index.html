@@ -86,7 +86,10 @@ video{
     border-radius:15px;
     display:none;
 }
-
+#introText{
+    white-space: pre-line;
+}
+    
 #messageCard.show{
     display:block;
     animation:fadeIn 1s ease;
@@ -114,6 +117,7 @@ video{
 
 <!-- 🔥 INTRO -->
 <div id="overlay">
+    <div id="introHeading">Here's something for you, Madam jii💕</div>
     <div id="introText"></div>
     <div class="heart" onclick="start()">❤️</div>
 </div>
@@ -181,7 +185,7 @@ function showMain(){
 function openMessage(){
     document.getElementById("messageCard").classList.add("show");
 
-    let msg=`There’s something really special about you… the way you smile makes everything feel lighter. You have a calm, positive vibe that’s rare. Stay exactly the way you are, because honestly… it suits you perfectly 🌸';
+    let msg=`There’s something really special about you… the way you smile makes everything feel lighter. You have a calm, positive vibe that’s rare. Stay exactly the way you are, because honestly… it suits you perfectly 🌸`;
 
     typeText(finalMessage,msg,30);
 }
