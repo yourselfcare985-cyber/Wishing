@@ -219,7 +219,27 @@ function showMain(){
         });
     });
 }
+function triggerHearts(){
+    for(let i=0;i<20;i++){
+        let heart=document.createElement("div");
+        heart.className="heart-burst";
+        heart.innerHTML="💖";
 
+        // random direction
+        let x=(Math.random()*200-100)+"px";
+        let y=(Math.random()*-200)+"px";
+
+        heart.style.setProperty("--x",x);
+        heart.style.setProperty("--y",y);
+
+        heart.style.left="50%";
+        heart.style.top="50%";
+
+        document.body.appendChild(heart);
+
+        setTimeout(()=>heart.remove(),1000);
+    }
+}
 /* 💌 OPEN MESSAGE */
 function openMessage(){
     document.getElementById("messageCard").classList.add("show");
