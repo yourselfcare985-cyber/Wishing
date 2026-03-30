@@ -6,7 +6,7 @@
 <title>For Harshita ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 <style>
 body{
     margin:0;
@@ -25,6 +25,10 @@ video{
     transition:opacity 1s ease;
 }
 
+    #centerText{
+    font-family:'Nunito', sans-serif;
+    }
+    
 /* 🔥 OVERLAY */
 #overlay{
     position:fixed;
@@ -81,7 +85,12 @@ video{
 
 #title1{font-size:24px;opacity:0.8;}
 #title2{font-size:48px;font-weight:700;}
-
+    
+.fade-up{
+    opacity:0 !important;
+    transform:translateY(-30px) scale(0.9);
+    transition:all 0.6s ease;
+}
 #messageCard{
     margin-top:20px;
     background:rgba(0,0,0,0.5);
@@ -165,22 +174,36 @@ function typeText(el,text,speed,callback){
 /* ❤️ START */
 function start(){
 
-    let heading=document.getElementById("introHeading");
-    heading.style.opacity="0";
-    setTimeout(()=>heading.style.display="none",500);
+    let heading = document.getElementById("introHeading");
+    let intro = document.getElementById("introText");
+    let heart = document.querySelector(".heart");
 
+    // 🎬 animate sabko ek saath hatao
+    heading.classList.add("fade-up");
+    intro.classList.add("fade-up");
+    heart.classList.add("fade-up");
+
+    // 🎥 video switch
     document.getElementById("bg1").style.opacity=0;
     document.getElementById("bg2").style.opacity=1;
 
+    // ⏳ animation complete hone do
     setTimeout(()=>{
+
+        heading.style.display="none";
+        intro.style.display="none";
+        heart.style.display="none";
+
+        // 👉 ab intro type hoga
         typeText(
-            introText,
+            document.getElementById("introText"),
             "Dear Harshita ❤️\nthis is for you 🫶",
             60,
             ()=>setTimeout(showWish,800)
         );
-    },500);
-}
+
+    },600);
+    }
 
 /* ✨ CENTER WISH */
 function showWish(){
