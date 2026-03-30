@@ -170,8 +170,8 @@ function showMain(){
     setTimeout(()=>card.classList.add("show"),50);
 
     // title typing
-    typeText(title1,"Happy Birthday 🎂",70,()=>{
-        typeText(title2,"Harshita ❤️",100,()=>{
+    typeText(title1,"Happy Birthday 🎂🎂🎂",50,()=>{
+        typeText(title2,"Harshita 💖💖",70,()=>{
             setTimeout(openMessage,600);
         });
     });
@@ -181,17 +181,7 @@ function showMain(){
 function openMessage(){
     document.getElementById("messageCard").classList.add("show");
 
-    let msg=`There’s something about you that’s just… different.
-
-Not loud, not dramatic — but still impossible to ignore.
-
-The way you exist… it quietly changes the mood around you.
-
-And honestly?
-That’s rare.
-
-Stay like that.
-Because that version of you… is already enough 🌸`;
+    let msg=`There’s something really special about you… the way you smile makes everything feel lighter. You have a calm, positive vibe that’s rare. Stay exactly the way you are, because honestly… it suits you perfectly 🌸';
 
     typeText(finalMessage,msg,30);
 }
