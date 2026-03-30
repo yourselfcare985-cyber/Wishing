@@ -146,23 +146,31 @@ function typeText(el, text, speed, callback){
     }
     t();
 }
-
-/* ❤️ START EXPERIENCE */
 function start(){
-    // switch video
+
+    // ❌ remove heading smoothly
+    let heading = document.getElementById("introHeading");
+    heading.style.transition = "opacity 0.5s ease";
+    heading.style.opacity = "0";
+
+    setTimeout(()=>heading.style.display="none",500);
+
+    // 🎥 switch video
     document.getElementById("bg1").style.opacity=0;
     document.getElementById("bg2").style.opacity=1;
 
-    // intro text
-    typeText(
-        document.getElementById("introText"),
-        "Dear Harshita ❤️\nthis is for you 🫶",
-        60,
-        ()=>{
-            setTimeout(showMain,800);
-        }
-    );
-}
+    // ⏳ thoda delay de (important for feel)
+    setTimeout(()=>{
+        typeText(
+            document.getElementById("introText"),
+            "Dear Harshita ❤️\nthis is for you 🫶",
+            60,
+            ()=>{
+                setTimeout(showMain,800);
+            }
+        );
+    },500);
+    }
 
 /* 🎂 SHOW MAIN */
 function showMain(){
@@ -174,8 +182,8 @@ function showMain(){
     setTimeout(()=>card.classList.add("show"),50);
 
     // title typing
-    typeText(title1,"Happy Birthday 🎂🎂🎂",50,()=>{
-        typeText(title2,"Harshita 💖💖",70,()=>{
+    typeText(title1,"Happy Birthday",50,()=>{
+        typeText(title2,"Harshita ❤️❤️",70,()=>{
             setTimeout(openMessage,600);
         });
     });
