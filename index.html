@@ -15,7 +15,7 @@ body{
     color:white;
 }
 
-/* 🎥 BACKGROUND VIDEO */
+/* 🎥 VIDEO */
 video{
     position:fixed;
     width:100%;
@@ -25,7 +25,7 @@ video{
     transition:opacity 1s ease;
 }
 
-/* 🔥 OVERLAY INTRO */
+/* 🔥 OVERLAY */
 #overlay{
     position:fixed;
     width:100%;
@@ -38,7 +38,7 @@ video{
     text-align:center;
 }
 
-/* ❤️ HEART BUTTON */
+/* ❤️ HEART */
 .heart{
     font-size:60px;
     cursor:pointer;
@@ -50,7 +50,19 @@ video{
     50%{transform:scale(1.2);}
 }
 
-/* 🎂 MAIN CARD */
+/* CENTER TEXT */
+#centerText{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:22px;
+    opacity:0;
+    transition:opacity 0.6s ease;
+    text-align:center;
+}
+
+/* 🎂 CARD */
 #card{
     display:none;
     position:absolute;
@@ -67,40 +79,9 @@ video{
     transform:translate(-50%,-50%) scale(1);
 }
 
-/* ✨ TITLES */
-#title1{
-    font-size:24px;
-    opacity:0.8;
-}
+#title1{font-size:24px;opacity:0.8;}
+#title2{font-size:48px;font-weight:700;}
 
-#title2{
-    font-size:48px;
-    font-weight:700;
-}
-#title3{
-    font-size:18px;
-    opacity:0.85;
-    margin-top:5px;
-}
-
-/* 💥 HEART BURST */
-.heart-burst{
-    position:absolute;
-    font-size:20px;
-    animation:burst 1s ease forwards;
-}
-
-@keyframes burst{
-    0%{
-        opacity:1;
-        transform:translate(0,0) scale(1);
-    }
-    100%{
-        opacity:0;
-        transform:translate(var(--x), var(--y)) scale(1.8);
-    }
-}
-/* 💌 MESSAGE BOX */
 #messageCard{
     margin-top:20px;
     background:rgba(0,0,0,0.5);
@@ -108,10 +89,7 @@ video{
     border-radius:15px;
     display:none;
 }
-#introText{
-    white-space: pre-line;
-}
-    
+
 #messageCard.show{
     display:block;
     animation:fadeIn 1s ease;
@@ -122,17 +100,31 @@ video{
     to{opacity:1; transform:translateY(0);}
 }
 
+/* 💥 HEART BURST */
+.heart-burst{
+    position:fixed;
+    font-size:20px;
+    pointer-events:none;
+    animation:burst 1s ease forwards;
+}
+
+@keyframes burst{
+    0%{opacity:1; transform:translate(0,0) scale(1);}
+    100%{opacity:0; transform:translate(var(--x), var(--y)) scale(1.8);}
+}
+
+/* FIX newline */
+#introText{white-space:pre-line;}
 </style>
 </head>
 
 <body>
 
-<!-- 🎥 VIDEO 1 -->
+<!-- 🎥 VIDEOS -->
 <video id="bg1" autoplay muted loop>
 <source src="From Main Klickpin CF- Pinterest Video - 6Y0kWTCBv (1).mp4" type="video/mp4">
 </video>
 
-<!-- 🎥 VIDEO 2 -->
 <video id="bg2" autoplay muted loop style="opacity:0;">
 <source src="From Main Klickpin CF- Video Pinterest - 1157GYOZh.mp4" type="video/mp4">
 </video>
@@ -141,6 +133,7 @@ video{
 <div id="overlay">
     <div id="introHeading">Here's something for you, Madam jii💕</div>
     <div id="introText"></div>
+    <div id="centerText"></div>
     <div class="heart" onclick="start()">❤️</div>
 </div>
 
@@ -148,7 +141,6 @@ video{
 <div id="card">
     <h1 id="title1"></h1>
     <h2 id="title2"></h2>
-    <h3 id="title3"></h3>
 
     <div id="messageCard">
         <p id="finalMessage"></p>
@@ -157,8 +149,8 @@ video{
 
 <script>
 
-/* 🔥 REUSABLE TYPE FUNCTION */
-function typeText(el, text, speed, callback){
+/* 🔥 TYPE FUNCTION */
+function typeText(el,text,speed,callback){
     let i=0;
     el.innerHTML="";
     function t(){
@@ -169,82 +161,106 @@ function typeText(el, text, speed, callback){
     }
     t();
 }
+
+/* ❤️ START */
 function start(){
 
-    // ❌ remove heading smoothly
-    let heading = document.getElementById("introHeading");
-    heading.style.transition = "opacity 0.5s ease";
-    heading.style.opacity = "0";
-
+    let heading=document.getElementById("introHeading");
+    heading.style.opacity="0";
     setTimeout(()=>heading.style.display="none",500);
 
-    // 🎥 switch video
     document.getElementById("bg1").style.opacity=0;
     document.getElementById("bg2").style.opacity=1;
 
-    // ⏳ thoda delay de (important for feel)
     setTimeout(()=>{
         typeText(
-            document.getElementById("introText"),
+            introText,
             "Dear Harshita ❤️\nthis is for you 🫶",
             60,
-            ()=>{
-                setTimeout(showMain,800);
-            }
+            ()=>setTimeout(showWish,800)
         );
     },500);
-    }
+}
 
+/* ✨ CENTER WISH */
+function showWish(){
+    let c=document.getElementById("centerText");
+    c.style.opacity=1;
+
+    typeText(
+        c,
+        "I'm wishing you a many many happy returns of the day",
+        40,
+        ()=>{
+            setTimeout(()=>{
+                c.style.opacity=0;
+                setTimeout(showMain,700);
+            },1000);
+        }
+    );
+}
+
+/* 🎂 MAIN SCREEN */
 function showMain(){
+
     document.getElementById("overlay").style.display="none";
 
     let card=document.getElementById("card");
     card.style.display="block";
-
     setTimeout(()=>card.classList.add("show"),50);
 
-    // 1️⃣ Happy Birthday
-    typeText(title1,"I'm wishing you a many many happy returns of the day",40,()=>{
+    typeText(title1,"Happy Birthday 🎂",60,()=>{
 
-        // 2️⃣ New line
-        typeText(title3,"Happy Birthday",50,()=>{
+        setTimeout(()=>{
+            typeText(title2,"Harshita ❤️❤️",80,()=>{
 
-            // 3️⃣ Name (main impact)
-            typeText(title2,"Harshita ❤️❤️",70,()=>{
-
-                triggerHearts(); // 💥 yahan burst hoga
-                setTimeout(openMessage,600);
+                triggerHearts();
+                setTimeout(openMessage,800);
 
             });
-        });
+        },500);
+
     });
 }
+
+/* 💥 HEART BURST */
 function triggerHearts(){
-    for(let i=0;i<20;i++){
-        let heart=document.createElement("div");
-        heart.className="heart-burst";
-        heart.innerHTML="💖";
+    let cx=window.innerWidth/2;
+    let cy=window.innerHeight/2;
 
-        // random direction
-        let x=(Math.random()*200-100)+"px";
-        let y=(Math.random()*-200)+"px";
+    for(let i=0;i<25;i++){
+        let h=document.createElement("div");
+        h.className="heart-burst";
+        h.innerHTML="💖";
 
-        heart.style.setProperty("--x",x);
-        heart.style.setProperty("--y",y);
+        let angle=Math.random()*2*Math.PI;
+        let dist=Math.random()*150+50;
 
-        heart.style.left="50%";
-        heart.style.top="50%";
+        let x=Math.cos(angle)*dist+"px";
+        let y=Math.sin(angle)*dist+"px";
 
-        document.body.appendChild(heart);
+        h.style.setProperty("--x",x);
+        h.style.setProperty("--y",y);
 
-        setTimeout(()=>heart.remove(),1000);
+        h.style.left=cx+"px";
+        h.style.top=cy+"px";
+
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),1000);
     }
 }
-/* 💌 OPEN MESSAGE */
+
+/* 💌 MESSAGE */
 function openMessage(){
     document.getElementById("messageCard").classList.add("show");
 
-    let msg=`There’s something really special about you… the way you smile makes everything feel lighter. You have a calm, positive vibe that’s rare. Stay exactly the way you are, because honestly… it suits you perfectly 🌸`;
+    let msg=`There’s something really special about you…
+the way you smile makes everything feel lighter.
+
+You have a calm, positive vibe that’s rare.
+
+Stay exactly the way you are,
+because honestly… it suits you perfectly 🌸`;
 
     typeText(finalMessage,msg,30);
 }
