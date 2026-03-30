@@ -77,7 +77,29 @@ video{
     font-size:48px;
     font-weight:700;
 }
+#title3{
+    font-size:18px;
+    opacity:0.85;
+    margin-top:5px;
+}
 
+/* 💥 HEART BURST */
+.heart-burst{
+    position:absolute;
+    font-size:20px;
+    animation:burst 1s ease forwards;
+}
+
+@keyframes burst{
+    0%{
+        opacity:1;
+        transform:translate(0,0) scale(1);
+    }
+    100%{
+        opacity:0;
+        transform:translate(var(--x), var(--y)) scale(1.8);
+    }
+}
 /* 💌 MESSAGE BOX */
 #messageCard{
     margin-top:20px;
@@ -126,6 +148,7 @@ video{
 <div id="card">
     <h1 id="title1"></h1>
     <h2 id="title2"></h2>
+    <h3 id="title3"></h3>
 
     <div id="messageCard">
         <p id="finalMessage"></p>
@@ -172,7 +195,6 @@ function start(){
     },500);
     }
 
-/* 🎂 SHOW MAIN */
 function showMain(){
     document.getElementById("overlay").style.display="none";
 
@@ -181,10 +203,19 @@ function showMain(){
 
     setTimeout(()=>card.classList.add("show"),50);
 
-    // title typing
-    typeText(title1,"Happy Birthday I am wishing you a many many happy returns of the day",50,()=>{
-        typeText(title2,"Harshita ❤️❤️",70,()=>{
-            setTimeout(openMessage,600);
+    // 1️⃣ Happy Birthday
+    typeText(title1,"I'm wishing you a many many happy returns of the day",40,()=>{
+
+        // 2️⃣ New line
+        typeText(title3,"Happy Birthday",50,()=>{
+
+            // 3️⃣ Name (main impact)
+            typeText(title2,"Harshita ❤️❤️",70,()=>{
+
+                triggerHearts(); // 💥 yahan burst hoga
+                setTimeout(openMessage,600);
+
+            });
         });
     });
 }
