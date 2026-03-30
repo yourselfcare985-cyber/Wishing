@@ -1,1 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Harshita ❤️</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    overflow:hidden;
+    color:white;
+}
+
+/* 🎥 BACKGROUND VIDEO */
+video{
+    position:fixed;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-1;
+    transition:opacity 1s ease;
+}
+
+/* 🔥 OVERLAY INTRO */
+#overlay{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+}
+
+/* ❤️ HEART BUTTON */
+.heart{
+    font-size:60px;
+    cursor:pointer;
+    animation:beat 1s infinite;
+}
+
+@keyframes beat{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+}
+
+/* 🎂 MAIN CARD */
+#card{
+    display:none;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(0.8);
+    text-align:center;
+    opacity:0;
+    transition:all 0.8s ease;
+}
+
+#card.show{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1);
+}
+
+/* ✨ TITLES */
+#title1{
+    font-size:24px;
+    opacity:0.8;
+}
+
+#title2{
+    font-size:48px;
+    font-weight:700;
+}
+
+/* 💌 MESSAGE BOX */
+#messageCard{
+    margin-top:20px;
+    background:rgba(0,0,0,0.5);
+    padding:20px;
+    border-radius:15px;
+    display:none;
+}
+
+#messageCard.show{
+    display:block;
+    animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- 🎥 VIDEO 1 -->
+<video id="bg1" autoplay muted loop>
+<source src="" type="video/mp4">
+</video>
+
+<!-- 🎥 VIDEO 2 -->
+<video id="bg2" autoplay muted loop style="opacity:0;">
+<source src="video2.mp4" type="video/mp4">
+</video>
+
+<!-- 🔥 INTRO -->
+<div id="overlay">
+    <div id="introText"></div>
+    <div class="heart" onclick="start()">❤️</div>
+</div>
+
+<!-- 🎂 MAIN -->
+<div id="card">
+    <h1 id="title1"></h1>
+    <h2 id="title2"></h2>
+
+    <div id="messageCard">
+        <p id="finalMessage"></p>
+    </div>
+</div>
+
+<script>
+
+/* 🔥 REUSABLE TYPE FUNCTION */
+function typeText(el, text, speed, callback){
+    let i=0;
+    el.innerHTML="";
+    function t(){
+        if(i<text.length){
+            el.innerHTML+=text.charAt(i++);
+            setTimeout(t,speed);
+        }else if(callback) callback();
+    }
+    t();
+}
+
+/* ❤️ START EXPERIENCE */
+function start(){
+    // switch video
+    document.getElementById("bg1").style.opacity=0;
+    document.getElementById("bg2").style.opacity=1;
+
+    // intro text
+    typeText(
+        document.getElementById("introText"),
+        "Dear Harshita ❤️\nthis is for you 🫶",
+        60,
+        ()=>{
+            setTimeout(showMain,800);
+        }
+    );
+}
+
+/* 🎂 SHOW MAIN */
+function showMain(){
+    document.getElementById("overlay").style.display="none";
+
+    let card=document.getElementById("card");
+    card.style.display="block";
+
+    setTimeout(()=>card.classList.add("show"),50);
+
+    // title typing
+    typeText(title1,"Happy Birthday 🎂",70,()=>{
+        typeText(title2,"Harshita ❤️",100,()=>{
+            setTimeout(openMessage,600);
+        });
+    });
+}
+
+/* 💌 OPEN MESSAGE */
+function openMessage(){
+    document.getElementById("messageCard").classList.add("show");
+
+    let msg=`There’s something about you that’s just… different.
+
+Not loud, not dramatic — but still impossible to ignore.
+
+The way you exist… it quietly changes the mood around you.
+
+And honestly?
+That’s rare.
+
+Stay like that.
+Because that version of you… is already enough 🌸`;
+
+    typeText(finalMessage,msg,30);
+}
+
+</script>
+
+</body>
+</html>
